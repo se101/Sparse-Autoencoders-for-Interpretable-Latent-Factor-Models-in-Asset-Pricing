@@ -117,6 +117,40 @@ The latest pull produced:
 - FF5 shape: `(753, 7)`
 - FF5 date range: `1963-07-31` to `2026-03-31`
 
+### Build analysis dataset
+
+Run:
+
+```bash
+python3 scripts/build_analysis_dataset.py
+```
+
+This aligns Open Asset Pricing, FF3, and FF5 to the common monthly FF5/OpenAP
+sample:
+
+- sample start: `1963-07-31`
+- sample end: `2024-12-31`
+- months: `738`
+
+The script writes cleaned files under `data/analysis/`:
+
+- `openap_factors_balanced.csv`: 129 OpenAP long-short factors with no missing
+  values.
+- `openap_sorted_portfolios_balanced.csv`: 756 sorted portfolio returns with no
+  missing values.
+- `openap_factors_80pct_available.csv`: 163 factors with at least 80% monthly
+  availability.
+- `openap_sorted_portfolios_80pct_available.csv`: 1008 sorted portfolios with
+  at least 80% monthly availability.
+- `fama_french_3_factors_aligned.csv`: FF3 restricted to the common sample.
+- `fama_french_5_factors_aligned.csv`: FF5 restricted to the common sample.
+- `missingness_report.csv`: missing-value share by source column.
+- `data_prep_summary.json`: machine-readable summary of the data-prep run.
+
+Use the balanced files first for baseline regressions, PCA, and the first sparse
+autoencoder pass. Use the 80%-available files later if we want a larger universe
+with explicit imputation or missing-value masking.
+
 ### First data check
 
 Run:

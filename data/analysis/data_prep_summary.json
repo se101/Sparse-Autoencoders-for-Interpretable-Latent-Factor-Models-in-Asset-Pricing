@@ -1,0 +1,110 @@
+{
+  "common_sample_start": "1963-07-31",
+  "common_sample_end": "2024-12-31",
+  "common_months": 738,
+  "max_missing_share_for_80pct_available_files": 0.2,
+  "inputs": {
+    "openap_factors": {
+      "shape": [
+        738,
+        213
+      ],
+      "date_min": "1963-07-31",
+      "date_max": "2024-12-31",
+      "value_columns": 212,
+      "missing_values": 16215
+    },
+    "openap_sorted_portfolios": {
+      "shape": [
+        738,
+        1278
+      ],
+      "date_min": "1963-07-31",
+      "date_max": "2024-12-31",
+      "value_columns": 1277,
+      "missing_values": 95196
+    },
+    "ff3": {
+      "shape": [
+        738,
+        5
+      ],
+      "date_min": "1963-07-31",
+      "date_max": "2024-12-31",
+      "value_columns": 4,
+      "missing_values": 0
+    },
+    "ff5": {
+      "shape": [
+        738,
+        7
+      ],
+      "date_min": "1963-07-31",
+      "date_max": "2024-12-31",
+      "value_columns": 6,
+      "missing_values": 0
+    }
+  },
+  "outputs": {
+    "openap_factors_80pct_available": {
+      "shape": [
+        738,
+        164
+      ],
+      "date_min": "1963-07-31",
+      "date_max": "2024-12-31",
+      "value_columns": 163,
+      "missing_values": 2099
+    },
+    "openap_sorted_portfolios_80pct_available": {
+      "shape": [
+        738,
+        1009
+      ],
+      "date_min": "1963-07-31",
+      "date_max": "2024-12-31",
+      "value_columns": 1008,
+      "missing_values": 13378
+    },
+    "openap_factors_balanced": {
+      "shape": [
+        738,
+        130
+      ],
+      "date_min": "1963-07-31",
+      "date_max": "2024-12-31",
+      "value_columns": 129,
+      "missing_values": 0
+    },
+    "openap_sorted_portfolios_balanced": {
+      "shape": [
+        738,
+        757
+      ],
+      "date_min": "1963-07-31",
+      "date_max": "2024-12-31",
+      "value_columns": 756,
+      "missing_values": 0
+    },
+    "fama_french_3_factors_aligned": {
+      "shape": [
+        738,
+        5
+      ],
+      "date_min": "1963-07-31",
+      "date_max": "2024-12-31",
+      "value_columns": 4,
+      "missing_values": 0
+    },
+    "fama_french_5_factors_aligned": {
+      "shape": [
+        738,
+        7
+      ],
+      "date_min": "1963-07-31",
+      "date_max": "2024-12-31",
+      "value_columns": 6,
+      "missing_values": 0
+    }
+  }
+}
