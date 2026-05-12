@@ -94,6 +94,13 @@ Then run:
 python3 scripts/pull_openassetpricing.py
 ```
 
+If `data/raw/openassetpricing_predictor_ports_full.csv` already exists, rebuild
+the model-ready panels without another download:
+
+```bash
+python3 scripts/pull_openassetpricing.py --from-raw
+```
+
 The latest pull produced:
 
 - raw portfolio data shape: `(1226794, 7)`
@@ -150,6 +157,107 @@ The script writes cleaned files under `data/analysis/`:
 Use the balanced files first for baseline regressions, PCA, and the first sparse
 autoencoder pass. Use the 80%-available files later if we want a larger universe
 with explicit imputation or missing-value masking.
+
+### Paper-specific experiment targets
+
+The experiment scaffold is organized around two paper targets.
+
+Gu, Kelly, and Xiu, `ssrn-3335536.pdf`, is treated as an exact replication
+target. The expected input files are:
+
+```text
+data/gkx/
+  monthly_stock_returns.csv       # permno, date, ret_excess
+  monthly_characteristics.csv     # permno, date, 94 lagged characteristics
+```
+
+The exact GKX config in `configs/gkx_exact.json` uses the paper's sample split:
+1957-03 through 1974-12 for training, 1975-01 through 1986-12 for validation,
+and 1987-01 through 2016-12 for testing. It targets FF/PCA/IPCA-style
+benchmarks and `CA0` through `CA3` conditional autoencoders with `K = 1..6`.
+
+Validate the exact GKX inputs and build characteristic-managed portfolios with:
+
+```bash
+python3 scripts/experiments/run_gkx_exact.py
+```
+
+If you have WRDS access, build the CRSP monthly stock return side of the GKX
+panel with:
+
+```bash
+python3 scripts/pull_gkx_crsp_monthly.py --username YOUR_WRDS_USERNAME
+```
+
+The script writes `data/gkx/monthly_stock_returns.csv` with CRSP monthly returns,
+delisting-adjusted total returns, local Fama-French `RF`, excess returns, market
+equity, exchange code, share code, SIC, and delisting code. The characteristic
+side, `data/gkx/monthly_characteristics.csv`, is a separate Compustat/CCM
+milestone.
+
+We use the Feng-CityUHK EquityCharacteristics toolkit for the firm-level
+characteristic side. Fetch the toolkit with:
+
+```bash
+python3 scripts/fetch_equity_characteristics.py
+```
+
+Then run its documented WRDS workflow from the checkout:
+
+```bash
+python3 scripts/run_equity_characteristics_workflow.py \
+  --toolkit-dir external/EquityCharacteristics \
+  --workflow-subdir char60 \
+  --python .venv/bin/python
+```
+
+If you also want the top-level single-characteristic scripts, add
+`--include-single-characteristics`. Once the toolkit has produced a rank-imputed
+file such as `chars_rank_imputed.feather`, convert it to this project's GKX
+schema with:
+
+```bash
+python3 scripts/adapt_equity_characteristics.py \
+  external/EquityCharacteristics/char60/chars_rank_imputed.feather
+```
+
+The adapter writes `data/gkx/monthly_characteristics.csv`, preferring `rank_*`
+columns when present and aligning to the `permno,date` keys in
+`data/gkx/monthly_stock_returns.csv`.
+
+Ben Chaouch, Lo, Singh, and Xiong, `PDF_Ben.pdf`, is implemented as a
+methodology replication using balanced OpenAP long-short factors as the factor
+zoo and Global-q monthly 1-way anomaly portfolios as HXZ-style test assets. Its
+config lives in `configs/ben_factor_zoo.json`.
+
+Download and concatenate the Global-q monthly 1-way sorts with:
+
+```bash
+python3 scripts/pull_global_q_testing_portfolios.py
+```
+
+This writes:
+
+```text
+data/global_q/global_q_1way_monthly_long.csv
+data/global_q/global_q_1way_monthly_all_portfolios.csv
+data/global_q/global_q_1way_monthly_low_high.csv
+data/global_q/global_q_1way_monthly_metadata.csv
+```
+
+Run the first factor-zoo analogue with:
+
+```bash
+python3 scripts/experiments/run_ben_factor_zoo.py
+```
+
+By default this freezes the linear PCA and recursive PCA baselines over
+`K = 1..6`. To run the first sparse-autoencoder grid over hidden dimensions,
+activations, and L1 penalties:
+
+```bash
+python3 scripts/experiments/run_ben_factor_zoo.py --include-autoencoders
+```
 
 ### First data check
 

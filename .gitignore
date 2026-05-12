@@ -1,0 +1,19 @@
+.venv/
+__pycache__/
+*.py[cod]
+.DS_Store
+external/EquityCharacteristics/
+
+# Large or reproducible datasets (use scripts under scripts/ to fetch/build)
+data/gkx/
+data/global_q/
+data/raw/
+data/analysis/
+data/factors.csv
+data/openassetpricing_sorted_portfolio_returns.csv
+
+# Experiment outputs (regenerate with scripts/experiments/)
+results/
+
+# Local papers / binaries (optional; remove this line if you want PDFs on GitHub)
+references/*.pdf

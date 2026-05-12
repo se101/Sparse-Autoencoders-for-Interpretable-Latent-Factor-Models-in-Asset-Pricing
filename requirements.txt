@@ -1,0 +1,11 @@
+pandas
+numpy
+scikit-learn
+scipy
+statsmodels
+torch
+wrds
+pyarrow
+tqdm
+pandasql
+fuzzywuzzy

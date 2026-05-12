@@ -1,0 +1,25 @@
+{
+  "paper": "Ben Chaouch, Lo, Singh, and Xiong - Chimeras in the Factor Zoo",
+  "target": "methodology replication with Global-q HXZ-style test assets",
+  "inputs": {
+    "factor_zoo": "data/analysis/openap_factors_balanced.csv",
+    "test_assets": "data/global_q/global_q_1way_monthly_low_high.csv",
+    "ff5": "data/analysis/fama_french_5_factors_aligned.csv"
+  },
+  "source_for_test_assets": "https://global-q.org/testingportfolios.html",
+  "sample": ["1976-07-31", "2017-12-31"],
+  "normalization": "variance_normalize_factor_returns",
+  "test_asset_construction": "monthly 1-way value-weighted anomaly portfolios, low and high endpoint portfolios",
+  "latent_factor_grid": [1, 2, 3, 4, 5, 6],
+  "sparse_autoencoder_grid": {
+    "latent_factors": 6,
+    "hidden_layer_grid": [[16], [32], [64], [128], [64, 32]],
+    "activation_grid": ["relu", "tanh"],
+    "l1_grid": [0.0, 0.00001, 0.0001, 0.001],
+    "epochs": 250,
+    "learning_rate": 0.001,
+    "seed": 2026
+  },
+  "mispricing_gamma": 10.0,
+  "primary_metric": "fraction_of_test_assets_without_significant_alpha"
+}
