@@ -14,7 +14,7 @@ DATA_DIR = ROOT / "data"
 @dataclass
 class ProjectData:
     factors: pd.DataFrame
-    benchmarks: pd.DataFrame
+    test_portfolios: pd.DataFrame
 
 
 def _read_table(path: Path) -> pd.DataFrame:
@@ -49,40 +49,83 @@ def _normalize_table(df: pd.DataFrame, table_name: str) -> pd.DataFrame:
     return df
 
 
+def read_fgx_factors_csv(path: Path) -> pd.DataFrame:
+    """Load Feng–Giglio–Xiu (2020) Journal of Finance ``factors.csv``.
+
+    Drops ``RF`` and scales factor returns from decimals to **percentage points**
+    so they are comparable to monthly return panels often quoted in percent
+    (e.g. Ken French-style CSVs and many test-portfolio files).
+    """
+
+    df = _read_table(path)
+    if "Date" in df.columns and "date" not in df.columns:
+        df = df.rename(columns={"Date": "date"})
+    if "RF" not in df.columns:
+        raise ValueError(f"Expected FGX factors file with an `RF` column: {path}")
+    parsed_dates = pd.to_datetime(df["date"].astype(str), errors="coerce")
+    df = df.assign(date=parsed_dates.dt.to_period("M").dt.to_timestamp("M"))
+    df = df.sort_values("date").drop_duplicates(subset=["date"]).reset_index(drop=True)
+    df = df.drop(columns=["RF"], errors="ignore")
+    value_cols = [c for c in df.columns if c != "date"]
+    if len(value_cols) != 150:
+        raise ValueError(f"Expected 150 FGX factor columns in {path}, found {len(value_cols)}.")
+    df[value_cols] = df[value_cols].astype(float) * 100.0
+    return df
+
+
+def read_fgx_risk_free_rate(path: Path) -> pd.Series:
+    """Load the FGX replication ``RF`` column as monthly percent returns."""
+
+    df = _read_table(path)
+    if "Date" in df.columns and "date" not in df.columns:
+        df = df.rename(columns={"Date": "date"})
+    if "RF" not in df.columns:
+        raise ValueError(f"Expected FGX factors file with an `RF` column: {path}")
+    parsed_dates = pd.to_datetime(df["date"].astype(str), errors="coerce")
+    out = df.assign(
+        date=parsed_dates.dt.to_period("M").dt.to_timestamp("M"),
+        RF=pd.to_numeric(df["RF"], errors="coerce") * 100.0,
+    )
+    out = out.sort_values("date").drop_duplicates(subset=["date"]).set_index("date")
+    return out["RF"].rename("RF")
+
+
 def load_project_data(
     factors_path: Path | None = None,
-    benchmarks_path: Path | None = None,
+    test_portfolios_path: Path | None = None,
 ) -> ProjectData:
     factors_path = factors_path or (DATA_DIR / "factors.csv")
-    benchmarks_path = benchmarks_path or (DATA_DIR / "openassetpricing_sorted_portfolio_returns.csv")
+    test_portfolios_path = test_portfolios_path or (
+        DATA_DIR / "test_portfolios" / "global_q" / "global_q_1way_monthly_low_high.csv"
+    )
 
     if not factors_path.exists():
         raise FileNotFoundError(f"Missing factors file: {factors_path}")
-    if not benchmarks_path.exists():
-        raise FileNotFoundError(f"Missing benchmark file: {benchmarks_path}")
+    if not test_portfolios_path.exists():
+        raise FileNotFoundError(f"Missing test portfolios file: {test_portfolios_path}")
 
-    factors = _normalize_table(_read_table(factors_path), "factors")
-    benchmarks = _normalize_table(_read_table(benchmarks_path), "benchmarks")
+    factors = read_fgx_factors_csv(factors_path)
+    test_portfolios = _normalize_table(_read_table(test_portfolios_path), "test_portfolios")
 
-    return ProjectData(factors=factors, benchmarks=benchmarks)
+    return ProjectData(factors=factors, test_portfolios=test_portfolios)
 
 
 def summarize_project_data(data: ProjectData) -> dict:
     overlap = pd.merge(
         data.factors[["date"]],
-        data.benchmarks[["date"]],
+        data.test_portfolios[["date"]],
         on="date",
         how="inner",
     )
 
     return {
         "factors_shape": data.factors.shape,
-        "benchmarks_shape": data.benchmarks.shape,
+        "test_portfolios_shape": data.test_portfolios.shape,
         "factors_date_min": data.factors["date"].min(),
         "factors_date_max": data.factors["date"].max(),
-        "benchmarks_date_min": data.benchmarks["date"].min(),
-        "benchmarks_date_max": data.benchmarks["date"].max(),
+        "test_portfolios_date_min": data.test_portfolios["date"].min(),
+        "test_portfolios_date_max": data.test_portfolios["date"].max(),
         "overlap_months": len(overlap),
         "factors_missing": int(data.factors.isna().sum().sum()),
-        "benchmarks_missing": int(data.benchmarks.isna().sum().sum()),
+        "test_portfolios_missing": int(data.test_portfolios.isna().sum().sum()),
     }

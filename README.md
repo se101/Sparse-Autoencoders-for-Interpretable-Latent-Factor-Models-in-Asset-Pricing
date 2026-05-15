@@ -5,158 +5,53 @@ asset-pricing factor returns.
 
 ### Data source
 
-We are using two data sources.
+The factor zoo is **only** the **150 replicated factor returns** from Feng,
+Giglio, and Xiu (2020), *Taming the Factor Zoo* (*Journal of Finance*), as
+shipped in the journal’s replication archive (`data/factors.csv` in that package).
 
-Open Source Asset Pricing / Open Asset Pricing:
+- Copy the replication file to **`data/factors.csv`** at the project root
+  (see `.gitignore`: the file stays local).
+- Columns: **`Date`**, **`RF`**, then **150** factor return columns. Loaders drop
+  **`RF`** and scale decimals to **percentage points** so they align with common
+  monthly return panels (including test portfolios pulled for this project).
 
-- Website: https://www.openassetpricing.com/data/
-- Release used by the downloader: October 2025, version 2.0.0
-- Source file: `PredictorPortsFull.csv`
-- Coverage in the pulled file: January 1926 through December 2024
+**Test portfolios** (what we price / evaluate on—not the factor zoo) live under
+**`data/test_portfolios/`**, for example Global-q monthly 1-way anomaly panels.
+Pulled CSVs are gitignored; **`data/test_portfolios/.gitkeep`** keeps the
+directory in version control.
 
-The project script downloads the original-paper portfolio return file from
-Open Asset Pricing, saves a raw copy, and derives two model-ready panels:
-
-- `data/factors.csv`: long-short predictor portfolio returns, one column per
-  signal.
-- `data/openassetpricing_sorted_portfolio_returns.csv`: non-long-short sorted
-  portfolio returns, named as `<signal>_p<portfolio>`.
-- `data/openassetpricing_signal_metadata.csv`: signal definitions, categories,
-  signs, original paper metadata, and replication summary fields from
-  `SignalDoc.csv`.
-
-Open Asset Pricing includes missing values for some signals and portfolio
-sorts. This is expected because not every predictor exists for the full sample
-or has well-defined sorted portfolios in every month.
-
-Kenneth French's Dartmouth Data Library:
+Kenneth French’s Dartmouth Data Library (**FF3 factors for GKX / RF merge** only;
+not used in the Ben factor-zoo latent pipeline):
 
 - Website: https://mba.tuck.dartmouth.edu/pages/faculty/ken.french/data_library.html
-- Source files:
-  - `F-F_Research_Data_Factors_CSV.zip`
-  - `F-F_Research_Data_5_Factors_2x3_CSV.zip`
-- `data/fama_french_3_factors.csv`: canonical monthly FF3 factors:
-  `Mkt-RF`, `SMB`, `HML`, `RF`.
-- `data/fama_french_5_factors.csv`: canonical monthly FF5 factors:
-  `Mkt-RF`, `SMB`, `HML`, `RMW`, `CMA`, `RF`.
+- After `python3 scripts/pull_fama_french.py`:
+  - `data/fama_french_3_factors.csv` (`Mkt-RF`, `SMB`, `HML`, `RF`, …)
 
-The Ken French returns are kept in percent units, matching the Open Asset
-Pricing files.
+Ken French monthly factor returns are stored in **percent** (e.g. `5.07` for
+5.07% in a month).
 
 ### Expected layout
 
-After running the downloader, the data directory should look like this:
-
 ```text
 data/
-  factors.csv
-  openassetpricing_sorted_portfolio_returns.csv
-  openassetpricing_signal_metadata.csv
-  fama_french_3_factors.csv
-  fama_french_5_factors.csv
+  factors.csv                          # FGX (2020) replication; not committed
+  fama_french_3_factors.csv            # for GKX CRSP pull (RF); optional otherwise
+  test_portfolios/
+    global_q/
+      global_q_1way_monthly_low_high.csv
+    ff/
+      25_Portfolios_5x5.csv
+    ...
   raw/
-    openassetpricing_predictor_ports_full.csv
-    ken_french_ff3_csv.zip
-    ken_french_ff5_csv.zip
+    global_q/                           # optional cached zips from Global-q
+  gkx/                                  # optional: stock-level GKX panel
 ```
-
-### Expected columns
-
-`factors.csv`
-- `date`
-- one column per long-short factor return
-
-`openassetpricing_sorted_portfolio_returns.csv`
-- `date`
-- one column per sorted benchmark portfolio return
-
-`openassetpricing_signal_metadata.csv`
-- `Acronym`
-- descriptive/category fields such as `LongDescription`, `Cat.Signal`,
-  `Cat.Data`, `Cat.Economic`, `Detailed Definition`
-- original-paper fields such as `Authors`, `Year`, `Journal`
-- construction and evidence fields such as `Sign`, `Return`, `T-Stat`,
-  `LS Quantile`, `Portfolio Period`
-
-Dates can be monthly strings or timestamps. The loader will try to parse them.
-
-### Refresh Open Asset Pricing data
-
-Install the downloader dependency if needed:
-
-```bash
-python3 -m pip install openassetpricing
-```
-
-Then run:
-
-```bash
-python3 scripts/pull_openassetpricing.py
-```
-
-If `data/raw/openassetpricing_predictor_ports_full.csv` already exists, rebuild
-the model-ready panels without another download:
-
-```bash
-python3 scripts/pull_openassetpricing.py --from-raw
-```
-
-The latest pull produced:
-
-- raw portfolio data shape: `(1226794, 7)`
-- factor panel shape: `(1188, 213)`
-- benchmark panel shape: `(1188, 1278)`
-- signal metadata shape: `(331, 29)`
-- date range: `1926-01-30` to `2024-12-31`
 
 ### Refresh Fama-French data
-
-Run:
 
 ```bash
 python3 scripts/pull_fama_french.py
 ```
-
-The latest pull produced:
-
-- FF3 shape: `(1197, 5)`
-- FF3 date range: `1926-07-31` to `2026-03-31`
-- FF5 shape: `(753, 7)`
-- FF5 date range: `1963-07-31` to `2026-03-31`
-
-### Build analysis dataset
-
-Run:
-
-```bash
-python3 scripts/build_analysis_dataset.py
-```
-
-This aligns Open Asset Pricing, FF3, and FF5 to the common monthly FF5/OpenAP
-sample:
-
-- sample start: `1963-07-31`
-- sample end: `2024-12-31`
-- months: `738`
-
-The script writes cleaned files under `data/analysis/`:
-
-- `openap_factors_balanced.csv`: 129 OpenAP long-short factors with no missing
-  values.
-- `openap_sorted_portfolios_balanced.csv`: 756 sorted portfolio returns with no
-  missing values.
-- `openap_factors_80pct_available.csv`: 163 factors with at least 80% monthly
-  availability.
-- `openap_sorted_portfolios_80pct_available.csv`: 1008 sorted portfolios with
-  at least 80% monthly availability.
-- `fama_french_3_factors_aligned.csv`: FF3 restricted to the common sample.
-- `fama_french_5_factors_aligned.csv`: FF5 restricted to the common sample.
-- `missingness_report.csv`: missing-value share by source column.
-- `data_prep_summary.json`: machine-readable summary of the data-prep run.
-
-Use the balanced files first for baseline regressions, PCA, and the first sparse
-autoencoder pass. Use the 80%-available files later if we want a larger universe
-with explicit imputation or missing-value masking.
 
 ### Paper-specific experiment targets
 
@@ -171,16 +66,9 @@ data/gkx/
   monthly_characteristics.csv     # permno, date, 94 lagged characteristics
 ```
 
-The exact GKX config in `configs/gkx_exact.json` uses the paper's sample split:
-1957-03 through 1974-12 for training, 1975-01 through 1986-12 for validation,
-and 1987-01 through 2016-12 for testing. It targets FF/PCA/IPCA-style
-benchmarks and `CA0` through `CA3` conditional autoencoders with `K = 1..6`.
-
-Validate the exact GKX inputs and build characteristic-managed portfolios with:
-
-```bash
-python3 scripts/experiments/run_gkx_exact.py
-```
+The GKX design parameters live in **`src/experiments/config.py`** (`GKX_EXACT`):
+training 1957-03 through 1974-12, validation 1975-01 through 1986-12, testing
+1987-01 through 2016-12, with `CA0`–`CA3` autoencoder widths and `K = 1..6`.
 
 If you have WRDS access, build the CRSP monthly stock return side of the GKX
 panel with:
@@ -226,11 +114,11 @@ columns when present and aligning to the `permno,date` keys in
 `data/gkx/monthly_stock_returns.csv`.
 
 Ben Chaouch, Lo, Singh, and Xiong, `PDF_Ben.pdf`, is implemented as a
-methodology replication using balanced OpenAP long-short factors as the factor
-zoo and Global-q monthly 1-way anomaly portfolios as HXZ-style test assets. Its
-config lives in `configs/ben_factor_zoo.json`.
+methodology replication using the **FGX 150 factors** as the zoo and **Global-q**
+monthly 1-way anomaly portfolios as HXZ-style **test assets**. Config:
+`configs/ben_factor_zoo.json` and `src/experiments/config.py` (`BEN_FACTOR_ZOO`).
 
-Download and concatenate the Global-q monthly 1-way sorts with:
+Download and build Global-q panels into **`data/test_portfolios/global_q/`**:
 
 ```bash
 python3 scripts/pull_global_q_testing_portfolios.py
@@ -239,21 +127,31 @@ python3 scripts/pull_global_q_testing_portfolios.py
 This writes:
 
 ```text
-data/global_q/global_q_1way_monthly_long.csv
-data/global_q/global_q_1way_monthly_all_portfolios.csv
-data/global_q/global_q_1way_monthly_low_high.csv
-data/global_q/global_q_1way_monthly_metadata.csv
+data/test_portfolios/global_q/global_q_1way_monthly_long.csv
+data/test_portfolios/global_q/global_q_1way_monthly_all_portfolios.csv
+data/test_portfolios/global_q/global_q_1way_monthly_low_high.csv
+data/test_portfolios/global_q/global_q_1way_monthly_metadata.csv
 ```
 
-Run the first factor-zoo analogue with:
+If you previously used `data/global_q/`, move those CSVs into
+`data/test_portfolios/global_q/` (same filenames) or re-run the pull script.
+
+Run the factor-zoo analogue with:
 
 ```bash
 python3 scripts/experiments/run_ben_factor_zoo.py
 ```
 
-By default this freezes the linear PCA and recursive PCA baselines over
-`K = 1..6`. To run the first sparse-autoencoder grid over hidden dimensions,
-activations, and L1 penalties:
+By default this runs linear PCA and recursive PCA baselines over `K = 1..25`.
+It also writes PCA variance diagnostics plus scree and reconstruction-MSE plots:
+
+```text
+results/ben_factor_zoo/pca_variance_diagnostics.csv
+results/ben_factor_zoo/pca_scree_plot.png
+results/ben_factor_zoo/pca_reconstruction_mse_plot.png
+```
+
+Sparse autoencoder grid:
 
 ```bash
 python3 scripts/experiments/run_ben_factor_zoo.py --include-autoencoders
@@ -261,17 +159,9 @@ python3 scripts/experiments/run_ben_factor_zoo.py --include-autoencoders
 
 ### First data check
 
-Run:
-
 ```bash
 python3 scripts/check_data.py
 ```
 
-This prints:
-- factor and benchmark shapes
-- date ranges
-- number of overlapping months
-- missing-value counts
-
-If your raw files use different names or a different format, update
-`src/data_loading.py`.
+This prints factor and test-portfolio shapes, date ranges, overlapping months,
+and missing-value counts. If your layouts differ, update `src/data_loading.py`.

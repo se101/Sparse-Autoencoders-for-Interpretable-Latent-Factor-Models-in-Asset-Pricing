@@ -6,11 +6,10 @@ external/EquityCharacteristics/
 
 # Large or reproducible datasets (use scripts under scripts/ to fetch/build)
 data/gkx/
-data/global_q/
 data/raw/
-data/analysis/
 data/factors.csv
-data/openassetpricing_sorted_portfolio_returns.csv
+data/test_portfolios/*
+!data/test_portfolios/.gitkeep
 
 # Experiment outputs (regenerate with scripts/experiments/)
 results/

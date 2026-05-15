@@ -10,7 +10,7 @@ import pandas as pd
 
 ROOT = Path(__file__).resolve().parents[1]
 DATA_DIR = ROOT / "data"
-GLOBAL_Q_DIR = DATA_DIR / "global_q"
+TEST_PORTFOLIOS_DIR = DATA_DIR / "test_portfolios" / "global_q"
 RAW_DIR = DATA_DIR / "raw" / "global_q"
 
 BASE_URL = "http://global-q.org/uploads/1/2/2/6/122679606"
@@ -25,7 +25,7 @@ CATEGORIES = {
 
 
 def main() -> None:
-    GLOBAL_Q_DIR.mkdir(parents=True, exist_ok=True)
+    TEST_PORTFOLIOS_DIR.mkdir(parents=True, exist_ok=True)
     RAW_DIR.mkdir(parents=True, exist_ok=True)
 
     panels: list[pd.DataFrame] = []
@@ -40,10 +40,10 @@ def main() -> None:
     long_panel = pd.concat(panels, ignore_index=True)
     long_panel = long_panel.sort_values(["date", "category", "anomaly", "portfolio"]).reset_index(drop=True)
 
-    long_path = GLOBAL_Q_DIR / "global_q_1way_monthly_long.csv"
-    all_path = GLOBAL_Q_DIR / "global_q_1way_monthly_all_portfolios.csv"
-    low_high_path = GLOBAL_Q_DIR / "global_q_1way_monthly_low_high.csv"
-    metadata_path = GLOBAL_Q_DIR / "global_q_1way_monthly_metadata.csv"
+    long_path = TEST_PORTFOLIOS_DIR / "global_q_1way_monthly_long.csv"
+    all_path = TEST_PORTFOLIOS_DIR / "global_q_1way_monthly_all_portfolios.csv"
+    low_high_path = TEST_PORTFOLIOS_DIR / "global_q_1way_monthly_low_high.csv"
+    metadata_path = TEST_PORTFOLIOS_DIR / "global_q_1way_monthly_metadata.csv"
 
     long_panel.to_csv(long_path, index=False)
     _build_all_portfolios(long_panel).to_csv(all_path, index=False)

@@ -18,11 +18,6 @@ DATASETS = {
         "raw_name": "ken_french_ff3_csv.zip",
         "out_name": "fama_french_3_factors.csv",
     },
-    "ff5": {
-        "url": "https://mba.tuck.dartmouth.edu/pages/faculty/ken.french/ftp/F-F_Research_Data_5_Factors_2x3_CSV.zip",
-        "raw_name": "ken_french_ff5_csv.zip",
-        "out_name": "fama_french_5_factors.csv",
-    },
 }
 
 

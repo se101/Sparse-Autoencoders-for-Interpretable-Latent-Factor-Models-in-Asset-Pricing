@@ -1,0 +1,151 @@
+Row,ID,SR,Mean,tstat,Std,Year,Year_begin,Year_end,Descpription,Authors
+MktRf,1,0.5057,0.0064,3.2580,0.0437,1972,1931,1965,Excess Market Return,Black and Jensen and Scholes
+beta,2,-0.0538,-0.0008,-0.3468,0.0496,1973,1935,1968,Market Beta,Fama and Macbeth
+ep,3,0.2970,0.0028,1.9134,0.0327,1977,1956,1971,Earnings to price,Basu
+dy,4,0.0060,0.0001,0.0384,0.0404,1979,1952,1977,Dividend to price,Litzenberger and Ramaswamy
+sue,5,0.2634,0.0012,1.6969,0.0161,1982,1971,1980,Unexpected quarterly earnings,Rendelman and Jones and Latane
+pps,6,0.0216,0.0002,0.1393,0.0289,1982,1940,1978,Share price,Miller and Scholes  
+LTR,7,0.3633,0.0034,2.3402,0.0323,1985,1926,1982,Long-Term Reversal ,De Bondt and Thaler
+lev,8,0.2429,0.0021,1.5649,0.0303,1988,1948,1981,Leverage,Bhandari
+cashdebt,9,-0.1702,-0.0009,-1.0963,0.0182,1989,1965,1984,Cash flow to debt,Ou and Penman
+currat,10,0.0770,0.0006,0.4957,0.0291,1989,1965,1984,Current ratio,Ou and Penman
+pchcurrat,11,0.0047,0.0000,0.0306,0.0110,1989,1965,1984,% change in current ratio,Ou and Penman
+pchquick,12,-0.1189,-0.0004,-0.7661,0.0111,1989,1965,1984,% change in quick ratio,Ou and Penman
+pchsaleinv,13,0.4624,0.0017,2.9788,0.0127,1989,1965,1984,% change sales-to-inventory,Ou and Penman
+quick,14,-0.0287,-0.0002,-0.1849,0.0296,1989,1965,1984,Quick ratio,Ou and Penman
+salecash,15,0.0154,0.0001,0.0994,0.0282,1989,1965,1984,Sales to cash,Ou and Penman
+saleinv,16,0.1612,0.0009,1.0383,0.0183,1989,1965,1984,Sales to inventory,Ou and Penman
+salerec,17,0.2278,0.0014,1.4678,0.0213,1989,1965,1984,Sales to receivables,Ou and Penman
+baspread,18,-0.0325,-0.0004,-0.2094,0.0455,1989,1960,1979,Bid-ask spread,Amihud and Mendelson
+depr,19,0.1206,0.0011,0.7772,0.0316,1992,1978,1988,Depreciation / PP&E,Holthausen and Larcker
+pchdepr,20,0.2306,0.0008,1.4859,0.0127,1992,1978,1988,% change in depreciation,Holthausen and Larcker
+SMB,21,0.2447,0.0021,1.5766,0.0298,1993,1963,1991,Small Minus Big ,Fama and French
+HML,22,0.3434,0.0028,2.2125,0.0286,1993,1963,1991,High Minus Low ,Fama and French
+STR,23,0.2165,0.0015,1.3948,0.0243,1993,1965,1989,1-month momentum,Jegadeesh and Titman
+mom6m,24,0.2782,0.0021,1.7922,0.0260,1993,1965,1989,6-month momentum,Jegadeesh and Titman
+mom36m,25,0.1340,0.0009,0.8634,0.0240,1993,1965,1989,36-month momentum,Jegadeesh and Titman
+sgr,26,0.0578,0.0004,0.3723,0.0226,1994,1963,1990,Sales growth,Lakonishok and Shleifer and Vishny
+cp,27,0.3248,0.0031,2.0921,0.0333,1994,1963,1990,Cash flow-to-price,Lakonishok and Shleifer and Vishny  
+IPO,28,0.0867,0.0010,0.5587,0.0401,1995,1970,1990,New equity issue,Loughran and Ritter
+divi,29,-0.0342,-0.0003,-0.2205,0.0303,1995,1964,1988,Dividend initiation,Michaely and Thaler and Womack
+divo,30,-0.1804,-0.0018,-1.1620,0.0354,1995,1964,1988,Dividend omission,Michaely and Thaler and Womack
+acc,31,0.4602,0.0022,2.9644,0.0164,1996,1962,1991,Working capital accruals,Sloan
+sp,32,0.4184,0.0035,2.6956,0.0291,1996,1979,1991,Sales to price,Barbee and Mukherji and Raines
+cto,33,-0.1664,-0.0011,-1.0722,0.0224,1996,1979,1993,Capital turnover,Haugen and Baker  
+UMD,34,0.5021,0.0063,3.2345,0.0438,1997,1963,1993,Momentum ,Carhart
+turn,35,-0.0214,-0.0002,-0.1379,0.0373,1998,1962,1991,Share turnover,Datar and Naik and Radcliffe
+pchgm_pchsale,36,-0.1243,-0.0005,-0.8010,0.0133,1998,1974,1988,% change in gross margin - % change in sales,Abarbanell and Bushee
+pchsale_pchinvt,37,0.4211,0.0014,2.7127,0.0118,1998,1974,1988,% change in sales - % change in inventory,Abarbanell and Bushee
+pchsale_pchrect,38,0.4346,0.0014,2.7997,0.0111,1998,1974,1988,% change in sales - % change in A/R,Abarbanell and Bushee
+pchsale_pchxsga,39,0.1964,0.0009,1.2649,0.0151,1998,1974,1988,% change in sales - % change in SG&A,Abarbanell and Bushee
+etr,40,-0.0905,-0.0004,-0.5832,0.0160,1998,1974,1988,Effective Tax Rate,Abarbanell and Bushee  
+lfe,41,-0.0851,-0.0003,-0.5485,0.0131,1998,1974,1988,Labor Force Efficiency,Abarbanell and Bushee  
+os,42,0.0934,0.0005,0.6015,0.0193,1998,1981,1995,Ohlson's O-score,Dichev  
+zs,43,0.2211,0.0020,1.4243,0.0309,1998,1981,1995,Altman's Z-score,Dichev  
+pchcapx_ia,44,0.2052,0.0010,1.3219,0.0175,1998,1974,1988,Industry adjusted % change in capital expenditures,Abarbanell and Bushee
+nincr,45,0.0278,0.0001,0.1789,0.0111,1999,1982,1992,Number of earnings increases,Barth and Elliott and Finn
+indmom,46,0.0143,0.0001,0.0921,0.0294,1999,1963,1995,Industry momentum,Moskowitz and Grinblatt  
+ps,47,0.1843,0.0008,1.1872,0.0157,2000,1976,1996,Financial statements score,Piotroski
+bm_ia,48,0.3799,0.0022,2.4475,0.0198,2000,1963,1998,Industry-adjusted book to market,Asness and Porter and Stevens
+cfp_ia,49,0.5206,0.0026,3.3535,0.0176,2000,1963,1998,Industry-adjusted cash flow to price ratio,Asness and Porter and Stevens
+chempia,50,-0.0150,-0.0001,-0.0968,0.0140,2000,1963,1998,Industry-adjusted change in employees,Asness and Porter and Stevens
+mve_ia,51,0.3626,0.0036,2.3359,0.0345,2000,1963,1998,Industry-adjusted size,Asness and Porter and Stevens
+dolvol,52,0.3578,0.0038,2.3052,0.0371,2001,1966,1995,Dollar trading volume,Chordia and Subrahmanyam and  Anshuman
+std_dolvol,53,0.3877,0.0020,2.4978,0.0182,2001,1966,1995,Volatility of liquidity (dollar trading volume),Chordia and Subrahmanyam and Anshuman
+std_turn,54,0.0208,0.0002,0.1338,0.0355,2001,1966,1995,Volatility of liquidity (share turnover),Chordia and Subrahmanyam andAnshuman
+adm,55,-0.1557,-0.0013,-1.0030,0.0289,2001,1975,1995,Advertising Expense-to-market,Chan and Lakonishok and Sougiannis
+rdm,56,0.3619,0.0034,2.3314,0.0329,2001,1975,1995,R&D Expense-to-market,Chan and Lakonishok and Sougiannis
+rds,57,0.0550,0.0006,0.3544,0.0373,2001,1975,1995,R&D-to-sales,Chan and Lakonishok and Sougiannis
+kz,58,0.2526,0.0022,1.6270,0.0299,2001,1968,1997,Kaplan-Zingales Index,Lamont and Polk and Saa-Requejo  
+chinv,59,0.4072,0.0018,2.6232,0.0155,2002,1970,1997,Change in inventory,Thomas and Zhang
+chtx,60,0.1803,0.0009,1.1614,0.0164,2002,1970,1997,Change in tax expense,Thomas and Zhang
+ill,61,0.2864,0.0034,1.8448,0.0412,2002,1964,1997,Illiquidity,Amihud
+LIQ_PS,62,0.3856,0.0038,2.4843,0.0339,2003,1962,2000,Liquidity,Pastor and Stambaugh
+idiovol,63,0.0514,0.0007,0.3312,0.0493,2003,1976,1997,Idiosyncratic return volatility,Ali and Hwang and Trombley
+grltnoa,64,0.5183,0.0022,3.3386,0.0148,2003,1964,1993,Growth in long term net operating assets,Fairfield and Whisenant and Yohn
+ob_a,65,0.0575,0.0005,0.3703,0.0310,2003,1981,1999,Order backlog,Rajgopal and Shevlin and Venkatachalam  
+grltnoa_hxz,66,0.5604,0.0024,3.6100,0.0150,2003,1964,1993,Changes in Long-term Net Operating Assets,Fairfield and Whisenant and Yohn  
+cfp,67,0.3173,0.0027,2.0438,0.0300,2004,1973,1997,Cash flow to price ratio,Desai and Rajgopal and Venkatachalam
+rd,68,0.1111,0.0006,0.7156,0.0172,2004,1951,2001,R&D increase,Eberhart and Maxwell and Siddique
+cinvest,69,0.3644,0.0013,2.3477,0.0126,2004,1969,1995,Corporate investment,Titman and Wei and Xie
+roavol,70,0.1069,0.0010,0.6890,0.0319,2004,1975,2001,Earnings volatility,Francis and LaFond and Olsson and Schipper
+cinvest_a,71,0.3124,0.0013,2.0126,0.0142,2004,1969,1995,Abnormal Corporate Investment,Titman and Wei and Xie  
+noa,72,0.6663,0.0031,4.2926,0.0160,2004,1964,2002,Net Operating Assets,Hirshleifer and Hou and Teoh and Zhang  
+dnoa,73,0.4159,0.0014,2.6791,0.0115,2004,1964,2002,Changes in Net Operating Assets,Hirshleifer and Hou and Teoh and Zhang  
+tb,74,0.2832,0.0014,1.8241,0.0171,2004,1973,2000,Tax income to book income,Lev and Nissim  
+pricedelay,75,0.1678,0.0007,1.0807,0.0154,2005,1963,2001,Price delay,Hou and Moskowitz
+age,76,0.0111,0.0001,0.0718,0.0324,2005,1965,2001,years since first Compustat coverage,Jiang and Lee and Zhang
+egr,77,0.2757,0.0015,1.7763,0.0187,2005,1962,2001,Growth in common shareholder equity,Richardson and Sloan and Soliman and Tuna
+lgr,78,0.1326,0.0006,0.8541,0.0163,2005,1962,2001,Growth in long-term debt,Richardson and Sloan and Soliman and Tuna
+dcoa,79,0.3464,0.0019,2.2317,0.0194,2005,1962,2001,Change in Current Operating Assets,Richardson and Sloan and Soliman and Tuna
+dcol,80,0.0634,0.0003,0.4083,0.0191,2005,1962,2001,Change in Current Operating Liabilities,Richardson and Sloan and Soliman and Tuna
+dwc,81,0.2518,0.0011,1.6224,0.0146,2005,1962,2001,Changes in Net Non-cash Working Capital,Richardson and Sloan and Soliman and Tuna  
+dnca,82,0.4452,0.0021,2.8677,0.0162,2005,1962,2001,Change in Non-current Operating Assets,Richardson and Sloan and Soliman and Tuna  
+dncl,83,0.0965,0.0004,0.6216,0.0146,2005,1962,2001,Change in Non-current Operating Liabilities,Richardson and Sloan and Soliman and Tuna  
+dnco,84,0.3536,0.0023,2.2782,0.0224,2005,1962,2001,Change in Net Non-current Operating Assets,Richardson and Sloan and Soliman and Tuna  
+dfin,85,0.5900,0.0023,3.8008,0.0134,2005,1962,2001,Change in Net Financial Assets,Richardson and Sloan and Soliman and Tuna  
+ta,86,0.4479,0.0019,2.8855,0.0148,2005,1962,2001,Total accruals,Richardson and Sloan and Soliman and Tuna  
+dsti,87,-0.0834,-0.0003,-0.5371,0.0120,2005,1962,2001,Change in Short- term Investments,Richardson and Sloan and Soliman and Tuna
+dfnl,88,0.5611,0.0018,3.6149,0.0114,2005,1962,2001,Change in Financial Liabilities,Richardson and Sloan and Soliman and Tuna  
+egr_hxz,89,0.2997,0.0017,1.9309,0.0200,2005,1962,2001,Change in Book Equity,Richardson and Sloan and Soliman and Tuna
+ms,90,0.3710,0.0017,2.3900,0.0160,2005,1978,2001,Financial statements score,Mohanram  
+chmom,91,0.2982,0.0021,1.9213,0.0242,2006,NaN,2006,Change in 6-month momentum,Gettleman and Marks
+grcapx,92,0.3044,0.0014,1.9610,0.0156,2006,1976,1999,Growth in capital expenditures,Anderson and Garcia-Feijoo
+retvol,93,-0.0167,-0.0002,-0.1077,0.0432,2006,1986,2000,Return volatility,Ang and Hodrick and Xing and Zhang
+zerotrade,94,-0.0437,-0.0005,-0.2816,0.0368,2006,1960,2003,Zero trading days,Liu
+pchcapx3,95,0.2355,0.0011,1.5172,0.0169,2006,1976,1999,Three-year Investment Growth,Anderson and Garcia-Feijoo  
+cei,96,-0.0216,-0.0001,-0.1393,0.0229,2006,1968,2003,Composite Equity Issuance,Daniel and Titman  
+nef,97,0.0974,0.0008,0.6273,0.0281,2006,1971,2000,Net equity finance,Bradshaw and Richardson and Sloan  
+ndf,98,0.4832,0.0017,3.1129,0.0123,2006,1971,2000,Net debt finance,Bradshaw and Richardson and Sloan  
+nxf,99,0.3862,0.0022,2.4879,0.0199,2006,1971,2000,Net external finance,Bradshaw and Richardson and Sloan  
+rs,100,0.0903,0.0005,0.5816,0.0178,2006,1987,2003,Revenue Surprises,Jegadeesh and Livnat  
+herf,101,0.0384,0.0003,0.2471,0.0232,2006,1963,2001,Industry Concentration,Hou and Robinson  
+ww,102,-0.0264,-0.0002,-0.1700,0.0244,2006,1975,2001,Whited-Wu Index,Whited and Wu  
+roic,103,0.2935,0.0018,1.8907,0.0212,2007,1970,2005,Return on invested capital,Brown and Rowe
+tang,104,0.0707,0.0005,0.4555,0.0227,2007,1985,2000,Debt capacity/firm tangibility,Almeida and Campello
+op,105,0.1746,0.0016,1.1247,0.0325,2007,1971,2003,Payout yield,Boudoukh and Michaely and Richardson and Roberts  
+nop,106,0.1723,0.0016,1.1098,0.0329,2007,1971,2003,Net payout yield,Boudoukh and Michaely and Richardson and Roberts  
+ndp,107,0.0253,0.0002,0.1631,0.0332,2007,1962,1950,Net debt-to-price,Penman and Richardson and Tuna  
+ebp,108,0.1468,0.0014,0.9454,0.0322,2007,1962,2001,Enterprise book-to-price,Penman and Richardson and Tuna  
+chcsho,109,0.3612,0.0024,2.3268,0.0232,2008,1932,1969,Change in shares outstanding,Pontiff and Woodgate
+aeavol,110,-0.1702,-0.0008,-1.0963,0.0157,2008,1987,2006,Abnormal earnings announcement volume,Lerman and Livnat and Mendenhall
+ear,111,0.0684,0.0002,0.4409,0.0115,2008,1987,2004,Earnings announcement return,Kishore and Brandt and Santa-Clara and Venkatachalam
+moms12m,112,0.1728,0.0016,1.1130,0.0313,2008,1965,2002,Seasonality,Heston and Sadka  
+dpia,113,0.4203,0.0019,2.7073,0.0157,2008,1983,2005,Changes in PPE and Inventory-to-assets,Lyandres and Sun and Zhang  
+pchcapx,114,0.3953,0.0017,2.5468,0.0146,2008,1964,2003,Investment Growth,Xing  
+cdi,115,0.2163,0.0008,1.3935,0.0127,2008,1983,2005,Composite Debt Issuance,Lyandres and Sun and Zhang  
+rna,116,0.0859,0.0009,0.5534,0.0353,2008,1984,2002,Return on net operating assets,Soliman  
+pm,117,0.0444,0.0002,0.2861,0.0193,2008,1984,2002,Profit margin,Soliman  
+ato,118,0.0674,0.0006,0.4344,0.0322,2008,1984,2002,Asset turnover,Soliman  
+chatoia,119,0.4108,0.0014,2.6463,0.0121,2008,1984,2002,Industry-adjusted change in asset turnover,Soliman
+chpmia,120,-0.0316,-0.0001,-0.2037,0.0160,2008,1984,2002,Industry-adjusted change in profit margin,Soliman
+cashpr,121,0.3758,0.0027,2.4207,0.0245,2009,NaN,2009,Cash productivity,Chandrashekar and Rao
+sin,122,0.4165,0.0044,2.6829,0.0369,2009,1962,2006,Sin stocks,Hong and Kacperczyk
+rsup,123,0.1926,0.0012,1.2404,0.0211,2009,1974,2005,Revenue surprise,Kama
+stdcf,124,0.2663,0.0020,1.7155,0.0255,2009,2000,2008,Cash flow volatility,Huang
+absacc,125,-0.0856,-0.0005,-0.5511,0.0185,2010,1976,2008,Absolute accruals,Bandyopadhyay and Huang and Wirjanto
+invest,126,0.4280,0.0019,2.7572,0.0157,2010,1972,2006,Capital expenditures and inventory,Chen and Zhang
+roaq,127,-0.1391,-0.0009,-0.8961,0.0212,2010,1976,2005,Return on assets,Balakrishnan and Bartov and Faurel
+stdacc,128,0.2659,0.0019,1.7132,0.0251,2010,1976,2008,Accrual volatility,Bandyopadhyay and Huang and Wirjanto
+realestate_hxz,129,0.1733,0.0011,1.1166,0.0212,2010,1971,2005,Industry-adjusted Real Estate Ratio,Tuzel  
+pctacc,130,0.3503,0.0016,2.2563,0.0158,2011,1989,2008,Percent accruals,Hafzalla and Lundholm and Van Winkle
+maxret,131,-0.0030,0.0000,-0.0192,0.0369,2011,1926,2005,Maximum daily return,Bali and Cakici and Whitelaw
+ol,132,0.3280,0.0020,2.1127,0.0209,2011,1962,2008,Operating Leverage,Novy-Marx
+ivg,133,0.3007,0.0013,1.9368,0.0152,2011,1965,2009,Inventory Growth,Belo and Lin  
+poa,134,0.2889,0.0015,1.8611,0.0174,2011,1989,2008,Percent Operating Accruals,Hafzalla and Lundholm and Van Winkle  
+em,135,0.1762,0.0011,1.1348,0.0225,2011,1963,2009,Enterprise multiple,Loughran and Wellman  
+cash,136,0.1527,0.0013,0.9838,0.0290,2012,1963,2009,Cash holdings,Palazzo
+HML_Devil,137,0.2261,0.0023,1.4569,0.0348,2013,1950,2011,HML Devil ,Asness and Frazzini
+gma,138,0.2246,0.0015,1.4466,0.0231,2013,1963,2010,Gross profitability,Novy-Marx
+orgcap,139,0.3188,0.0021,2.0536,0.0227,2013,1970,2008,Organizational Capital,Eisfeldt and Papanikolaou
+BAB,140,0.9279,0.0091,5.9774,0.0341,2014,1926,2012,Betting Against Beta ,Frazzini and Pedersen
+QMJ,141,0.6006,0.0043,3.8690,0.0249,2014,1951,2012,Quality Minus Junk ,Asness and Frazzini and Pedersen
+hire,142,0.1287,0.0008,0.8289,0.0203,2014,1965,2010,Employee growth rate,Bazdresch and Belo and Lin
+gad,143,0.1303,0.0007,0.8395,0.0187,2014,1974,2010,Growth in advertising expense,Lou
+ala,144,0.1232,0.0009,0.7937,0.0242,2014,1984,2006,Book Asset Liquidity,Ortiz-Molina and Phillips  
+RMW,145,0.4979,0.0034,3.2074,0.0235,2015,1963,2013,Robust Minus Weak ,Fama and French
+CMA,146,0.4684,0.0026,3.0172,0.0195,2015,1963,2013,Conservative Minus Aggressive,Fama and French
+HXZ_IA,147,0.6474,0.0034,4.1706,0.0183,2015,1972,2012,HXZ Investment,Hou and Xue and Zhang
+HXZ_ROE,148,0.7746,0.0057,4.9901,0.0253,2015,1972,2012,HXZ Profitability ,Hou and Xue and Zhang
+Intermediary,149,0.0794,0.0015,0.5118,0.0658,2016,1970,2012,Intermediary Risk Factor,He and Kelly and Manela
+convind,150,0.2636,0.0011,1.6983,0.0146,2016,1985,2012,Convertible debt indicator,Valta

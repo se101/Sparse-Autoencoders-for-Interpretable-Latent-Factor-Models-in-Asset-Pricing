@@ -21,10 +21,10 @@ def main() -> None:
     if len(data.factors.columns) > 10:
         print(f"... ({len(data.factors.columns) - 10} more)")
 
-    print("\nBenchmark columns:")
-    print(list(data.benchmarks.columns[:10]))
-    if len(data.benchmarks.columns) > 10:
-        print(f"... ({len(data.benchmarks.columns) - 10} more)")
+    print("\nTest portfolio columns:")
+    print(list(data.test_portfolios.columns[:10]))
+    if len(data.test_portfolios.columns) > 10:
+        print(f"... ({len(data.test_portfolios.columns) - 10} more)")
 
 
 if __name__ == "__main__":

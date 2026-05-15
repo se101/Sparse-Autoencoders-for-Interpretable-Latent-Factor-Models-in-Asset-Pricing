@@ -51,16 +51,18 @@ class GKXExactConfig:
 class BenFactorZooConfig:
     """Project-data analogue of Ben Chaouch et al.'s factor-zoo experiments."""
 
-    factors_path: Path = DATA_DIR / "analysis" / "openap_factors_balanced.csv"
-    test_assets_path: Path = DATA_DIR / "global_q" / "global_q_1way_monthly_low_high.csv"
-    ff5_path: Path = DATA_DIR / "analysis" / "fama_french_5_factors_aligned.csv"
+    factors_path: Path = DATA_DIR / "factors.csv"
+    test_assets_path: Path = DATA_DIR / "test_portfolios" / "global_q" / "global_q_1way_monthly_low_high.csv"
     output_dir: Path = RESULTS_DIR / "ben_factor_zoo"
     sample: DateWindow = DateWindow("1976-07-31", "2017-12-31")
     latent_factors: int = 6
-    latent_factor_grid: tuple[int, ...] = (1, 2, 3, 4, 5, 6)
+    latent_factor_grid: tuple[int, ...] = tuple(range(1, 26))
     hidden_layer_grid: tuple[tuple[int, ...], ...] = ((16,), (32,), (64,), (128,), (64, 32))
     activation_grid: tuple[str, ...] = ("relu", "tanh")
     l1_grid: tuple[float, ...] = (0.0, 1e-5, 1e-4, 1e-3)
+    #: One hidden layer widths for simple (reconstruction-only) AE test-portfolio runs.
+    simple_ae_single_hidden_sizes: tuple[int, ...] = (64,)
+    simple_ae_activation_grid: tuple[str, ...] = ("relu", "tanh", "gelu", "elu")
     autoencoder_epochs: int = 250
     autoencoder_learning_rate: float = 1e-3
     autoencoder_seed: int = 2026
